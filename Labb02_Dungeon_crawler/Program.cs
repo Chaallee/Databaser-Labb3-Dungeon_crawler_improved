@@ -9,7 +9,7 @@ public class Program
         Console.CursorVisible = false;
 
         var level = new LevelData();
-        level.Load("Level1.txt");
+        level.Load("Levels/Level1.txt");
         var player = level.Player;
 
         var loop = new GameLoop(level, player);
