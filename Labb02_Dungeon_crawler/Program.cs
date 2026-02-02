@@ -6,10 +6,6 @@ public class Program
 
     static void Main()
     {
-        new Labb02_Dungeon_crawler.Database.MongoContext();
-        Console.ReadKey(true);
-        return;
-
         Console.CursorVisible = false;
 
         var level = new LevelData();

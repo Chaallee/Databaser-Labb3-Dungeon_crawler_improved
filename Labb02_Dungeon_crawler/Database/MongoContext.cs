@@ -1,30 +1,39 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Collections.Generic;
+
 namespace Labb02_Dungeon_crawler.Database
 {
     public class MongoContext
     {
+        private const string DatabaseName = "CharlieCarlegrund";
+        private readonly IMongoDatabase database;
+
         public MongoContext()
         {
             var client = new MongoClient("mongodb://localhost:27017");
+            database = client.GetDatabase(DatabaseName);
 
-            var database = client.GetDatabase("CharlieCarlegrund");
+            EnsureCollectionsExist();
+        }
 
-            var collection = database.GetCollection<BsonDocument>("test");
+        public IMongoCollection<BsonDocument> PlayerClasses =>
+            database.GetCollection<BsonDocument>("playerClasses");
 
-            var document = new BsonDocument
-            {
-                { "test123", "MongoDB test" }
-            };
+        public IMongoCollection<BsonDocument> SaveGames =>
+            database.GetCollection<BsonDocument>("saveGames");
 
-            collection.InsertOne(document);
+        private void EnsureCollectionsExist()
+        {
+            var existingCollections = database
+                .ListCollectionNames()
+                .ToList();
 
-            var result = collection.Find(new BsonDocument()).FirstOrDefault();
+            if (!existingCollections.Contains("playerClasses"))
+                database.CreateCollection("playerClasses");
 
-
-            Console.WriteLine("test resultat:");
-            Console.WriteLine(result?.ToString());
+            if (!existingCollections.Contains("saveGames"))
+                database.CreateCollection("saveGames");
         }
     }
 }
