@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Labb02_Dungeon_crawler
 {
-
     public class LevelData
     {
         private List<LevelElement> elements = new List<LevelElement>();
@@ -15,6 +14,8 @@ namespace Labb02_Dungeon_crawler
         public Player Player { get; private set; }
 
         private readonly List<Position> discoveredWalls = new List<Position>();
+        public IReadOnlyList<Position> DiscoveredWalls => discoveredWalls;
+
         private readonly List<LevelElement> toRemove = new List<LevelElement>();
         private List<(string Message, ConsoleColor Color)> log = new List<(string, ConsoleColor)>();
 
