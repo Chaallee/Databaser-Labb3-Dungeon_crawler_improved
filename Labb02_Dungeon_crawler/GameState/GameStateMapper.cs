@@ -37,9 +37,5 @@ namespace Labb02_Dungeon_crawler.GameState
 
         }
 
-        private static DiceState MapDice(Dice dice)
-        {
-
-        }
     }
 }
