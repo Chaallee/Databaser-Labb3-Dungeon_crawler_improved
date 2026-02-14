@@ -1,6 +1,8 @@
-# Labb 2 - Dungeon crawler
+# Databaser labb 3 - Dungeon Crawler improved.
 
-Fokus på denna labb var objektorienterad programmering (OOP) i C#.
+Detta är en förbättrad version av Dungeon Crawler från Labb 2 i C#-kursen.
+
+Fokus på denna labb var att med hjälp av MongoDB kunna spara val av karaktär och hur mycket den har utforskat på kartan, antal rundor, samt HP kvar & vilka fiender man har dödat.
 
 Spelet använder arv & abstrakta klasser för att skapa element som väggar och fiender med olika rörelsemönster och beteende.
 Spelaren har begränsat synfält och utforskar en karta inläst från en textfil och stöter på fiender som man kan slåss mot i tärningsbaserad strid.
