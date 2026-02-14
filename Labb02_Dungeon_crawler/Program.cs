@@ -62,9 +62,6 @@ public class Program
         Console.Write("Enter your name: ");
         Console.CursorVisible = true;
         string playerName = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(playerName))
-            playerName = "Hero";
-        Console.CursorVisible = false;
 
         var classes = context.PlayerClasses.Find(_ => true).ToList();
         Console.WriteLine("\nChoose your class:");
@@ -97,6 +94,14 @@ public class Program
 
         string className = classes[classIndex].Name;
 
+        ConsoleColor selectedClassColor = className switch
+        {
+            "Warrior" => ConsoleColor.Red,
+            "Wizard" => ConsoleColor.Blue,
+            "Rogue" => ConsoleColor.Green,
+            _ => ConsoleColor.White
+        };
+
         var level = new LevelData();
         level.Load("Levels/Level1.txt");
         var player = level.Player;
@@ -104,7 +109,14 @@ public class Program
         player.ClassName = className;
 
         Console.Clear();
-        Console.WriteLine($"Welcome, {playerName} the {className}!");
+        Console.Write("Welcome, ");
+        Console.ForegroundColor = selectedClassColor;
+        Console.Write(playerName);
+        Console.Write(" the ");
+        Console.Write(className);
+        Console.ResetColor();
+        Console.WriteLine("!");
+
         Console.WriteLine("\nControls: WASD or Arrow Keys to move, ESC to save and exit");
         Console.WriteLine("\nPress any key to start...");
         Console.ReadKey(true);
