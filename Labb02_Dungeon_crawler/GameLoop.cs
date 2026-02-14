@@ -11,7 +11,6 @@ namespace Dungeon_crawler_improved
         private readonly LevelData level;
         private readonly Player player;
         private readonly GameStateRepository repository;
-        private bool gameIsRunning = true;
 
         public GameLoop(LevelData level, Player player, GameStateRepository repository)
         {
@@ -24,7 +23,7 @@ namespace Dungeon_crawler_improved
         {
             level.DrawAll();
 
-            while (gameIsRunning)
+            while (true)
             {
                 if (player.Health <= 0)
                 {
