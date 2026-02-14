@@ -1,8 +1,4 @@
 ﻿using MongoDB.Driver;
-using MongoDB.Bson;
-using System.Collections.Generic;
-
-using Labb02_Dungeon_crawler.GameState;
 
 namespace Labb02_Dungeon_crawler.Database
 {

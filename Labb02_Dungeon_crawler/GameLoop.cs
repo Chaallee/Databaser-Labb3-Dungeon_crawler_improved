@@ -1,9 +1,8 @@
 ﻿using Labb02_Dungeon_crawler.Elements;
+using Labb02_Dungeon_crawler.Database;
+using Labb02_Dungeon_crawler.GameState;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Labb02_Dungeon_crawler
 {
@@ -11,17 +10,19 @@ namespace Labb02_Dungeon_crawler
     {
         private readonly LevelData level;
         private readonly Player player;
+        private readonly GameStateRepository repository;
         private bool gameIsRunning = true;
 
-        public GameLoop(LevelData level, Player player)
+        public GameLoop(LevelData level, Player player, GameStateRepository repository)
         {
             this.level = level;
             this.player = player;
+            this.repository = repository;
         }
 
         public void Run()
         {
-            level.DrawAll(); 
+            level.DrawAll();
 
             while (gameIsRunning)
             {
@@ -35,10 +36,15 @@ namespace Labb02_Dungeon_crawler
                 var key = keyInfo.Key;
 
                 if (key == ConsoleKey.Escape)
+                {
+                    SaveGame();
+                    level.LogMessage("Game saved! Exiting...", ConsoleColor.Cyan);
+                    level.DrawAll();
+                    Thread.Sleep(1000);
                     return;
+                }
 
                 Position playerPosition = new Position(0, 0);
-
                 switch (key)
                 {
                     case ConsoleKey.W:
@@ -57,8 +63,12 @@ namespace Labb02_Dungeon_crawler
                     case ConsoleKey.RightArrow:
                         playerPosition = playerPosition.Offset(1, 0);
                         break;
- 
+                    case ConsoleKey.Spacebar:
+                        break;
+                    default:
+                        continue; 
                 }
+
 
                 PlayerMovement(playerPosition);
 
@@ -66,12 +76,23 @@ namespace Labb02_Dungeon_crawler
                 foreach (var enemy in enemies)
                 {
                     enemy.EnemyWalkUpdate(level, player);
+
+                    if (enemy.X == player.X && enemy.Y == player.Y)
+                    {
+                        Combat(enemy, player);
+                    }
                 }
 
                 level.RemoveDeadEnemies();
-                level.IncrementTurn(); 
-                level.DrawAll();       
+                level.IncrementTurn();
+                level.DrawAll();
             }
+        }
+
+        private void SaveGame()
+        {
+            var state = GameStatePersistence.Save(level);
+            repository.Save(state);
         }
 
         private void PlayerMovement(Position playerMove)

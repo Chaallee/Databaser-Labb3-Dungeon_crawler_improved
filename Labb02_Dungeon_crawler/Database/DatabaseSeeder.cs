@@ -13,7 +13,7 @@ namespace Labb02_Dungeon_crawler.Database
             {
                 new PlayerClass { Name = "Warrior" },
                 new PlayerClass { Name = "Wizard" },
-                new PlayerClass { Name = "Thief" }
+                new PlayerClass { Name = "Rogue" }
             };
 
             context.PlayerClasses.InsertMany(classes);
