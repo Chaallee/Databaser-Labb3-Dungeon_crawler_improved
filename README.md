@@ -19,9 +19,28 @@ Spelet styrs med piltangenter eller WASD.
 <img width="239" height="123" alt="image" src="https://github.com/user-attachments/assets/eacca7d6-9ff6-42f6-89f3-6da226286071" />
 
 
+## Krav
 
+### Systemkrav
+- .NET 6.0 eller högre
+- MongoDB (lokal installation eller MongoDB Atlas)
 
+### NuGet-paket
+- `MongoDB.Driver` (version 2.x eller högre)
 
+## Installation & Konfiguration
 
+1. **Klona repositoryt**
+```bash
+   git clone https://github.com/Chaallee/Labb02_Dungeon_crawler.git
+   cd Labb02_Dungeon_crawler
+```
+
+2. **Installera MongoDB**
+   - Ladda ner och installera [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+   - Eller använd [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) (molnversion)
+   - Se till att MongoDB körs på `localhost:27017` (standard)
+
+3. **Bygg och kör**
 
 Skapad av Charlie Carlegrund.
