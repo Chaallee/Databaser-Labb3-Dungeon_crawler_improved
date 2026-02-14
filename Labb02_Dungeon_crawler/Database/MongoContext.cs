@@ -2,38 +2,24 @@
 using MongoDB.Bson;
 using System.Collections.Generic;
 
+using Labb02_Dungeon_crawler.GameState;
+
 namespace Labb02_Dungeon_crawler.Database
 {
     public class MongoContext
     {
-        private const string DatabaseName = "CharlieCarlegrund";
         private readonly IMongoDatabase database;
 
-        public MongoContext()
+        public MongoContext(string connectionString)
         {
-            var client = new MongoClient("mongodb://localhost:27017");
-            database = client.GetDatabase(DatabaseName);
-
-            EnsureCollectionsExist();
+            var client = new MongoClient(connectionString);
+            database = client.GetDatabase("CharlieCarlegrund");
         }
 
-        public IMongoCollection<BsonDocument> PlayerClasses =>
-            database.GetCollection<BsonDocument>("playerClasses");
+        public IMongoCollection<GameState.GameState> GameStates =>
+            database.GetCollection<GameState.GameState>("GameStates");
 
-        public IMongoCollection<BsonDocument> SaveGames =>
-            database.GetCollection<BsonDocument>("saveGames");
-
-        private void EnsureCollectionsExist()
-        {
-            var existingCollections = database
-                .ListCollectionNames()
-                .ToList();
-
-            if (!existingCollections.Contains("playerClasses"))
-                database.CreateCollection("playerClasses");
-
-            if (!existingCollections.Contains("saveGames"))
-                database.CreateCollection("saveGames");
-        }
+        public IMongoCollection<PlayerClass> PlayerClasses =>
+            database.GetCollection<PlayerClass>("PlayerClasses");
     }
 }
