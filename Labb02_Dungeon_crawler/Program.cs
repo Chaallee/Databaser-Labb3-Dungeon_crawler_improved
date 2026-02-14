@@ -161,9 +161,7 @@ public class Program
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey(true);
 
-        var context = new MongoContext(ConnectionString);
-        var repository2 = new GameStateRepository(context);
-        var loop = new GameLoop(level, player, repository2);
+        var loop = new GameLoop(level, player, repository);
         loop.Run();
     }
 
