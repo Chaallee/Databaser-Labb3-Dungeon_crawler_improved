@@ -27,8 +27,10 @@ public class Program
         while (true)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("=== DUNGEON CRAWLER ===\n");
-            Console.Write("Select option by pressing one of the followng keys:\n");
+            Console.ResetColor();
+            Console.Write("Select option by pressing one of the following keys:\n");
             Console.WriteLine("\n1. New Game");
             Console.WriteLine("2. Continue Game");
             Console.WriteLine("3. Delete Saved Game");
@@ -60,17 +62,29 @@ public class Program
         Console.Write("Enter your name: ");
         Console.CursorVisible = true;
         string playerName = Console.ReadLine();
-
+        if (string.IsNullOrWhiteSpace(playerName))
+            playerName = "Hero";
         Console.CursorVisible = false;
 
         var classes = context.PlayerClasses.Find(_ => true).ToList();
         Console.WriteLine("\nChoose your class:");
+
         for (int i = 0; i < classes.Count; i++)
         {
+            ConsoleColor classColor = classes[i].Name switch
+            {
+                "Warrior" => ConsoleColor.Red,
+                "Wizard" => ConsoleColor.Blue,
+                "Rogue" => ConsoleColor.Green,
+                _ => ConsoleColor.White
+            };
+
+            Console.ForegroundColor = classColor;
             Console.WriteLine($"{i + 1}. {classes[i].Name}");
+            Console.ResetColor();
         }
 
-        Console.Write("\nSelect class: ");
+        Console.Write("\nSelect class by pressing one of the following keys: ");
         Console.CursorVisible = true;
         string classInput = Console.ReadLine();
         Console.CursorVisible = false;
