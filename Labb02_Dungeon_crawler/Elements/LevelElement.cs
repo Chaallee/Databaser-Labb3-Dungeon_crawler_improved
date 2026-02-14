@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Labb02_Dungeon_crawler.Elements
 {
@@ -12,7 +8,9 @@ namespace Labb02_Dungeon_crawler.Elements
         public int Y { get; set; }
         protected ConsoleColor Color { get; set; }
         protected char Symbol { get; set; }
+
         protected LevelElement() { }
+
         protected LevelElement(int x, int y, ConsoleColor color, char symbol)
         {
             X = x;
@@ -20,6 +18,7 @@ namespace Labb02_Dungeon_crawler.Elements
             Color = color;
             Symbol = symbol;
         }
+
         public virtual void Draw()
         {
             Console.ForegroundColor = Color;

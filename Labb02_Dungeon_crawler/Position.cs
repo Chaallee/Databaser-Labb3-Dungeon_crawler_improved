@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Labb02_Dungeon_crawler
 {
@@ -33,7 +29,5 @@ namespace Labb02_Dungeon_crawler
         {
             return X == otherElement.X && Y == otherElement.Y;
         }
-
     }
 }
-
