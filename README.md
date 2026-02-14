@@ -39,4 +39,10 @@ Spelet styrs med piltangenter eller WASD.
 
 3. **Bygg och kör**
 
+### Kontroller
+- **WASD** eller **Piltangenter** - Flytta din karaktär
+- **Mellanslag** - Stå kvar (hoppa över tur)
+- **ESC** - Spara spelet och avsluta
+
+
 Skapad av Charlie Carlegrund.
