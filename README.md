@@ -31,10 +31,6 @@ Spelet styrs med piltangenter eller WASD.
 ## Installation & Konfiguration
 
 1. **Klona repositoryt**
-```bash
-   git clone https://github.com/Chaallee/Labb02_Dungeon_crawler.git
-   cd Labb02_Dungeon_crawler
-```
 
 2. **Installera MongoDB**
    - Ladda ner och installera [MongoDB Community Server](https://www.mongodb.com/try/download/community)
