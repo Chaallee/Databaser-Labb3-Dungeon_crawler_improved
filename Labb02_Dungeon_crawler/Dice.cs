@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labb02_Dungeon_crawler
+namespace Dungeon_crawler_improved
 {
 
     public class Dice

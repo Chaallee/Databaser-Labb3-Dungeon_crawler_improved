@@ -1,16 +1,16 @@
-﻿using Labb02_Dungeon_crawler.Elements;
+﻿using Dungeon_crawler_improved.Elements;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Labb02_Dungeon_crawler
+namespace Dungeon_crawler_improved
 {
     public class LevelData
     {
         private List<LevelElement> elements = new List<LevelElement>();
         public IReadOnlyList<LevelElement> Elements => elements;
-        public Player Player { get; private set; }
+        public Player Player { get; private set; } = null!;
 
         private readonly List<Position> discoveredWalls = new List<Position>();
         public IReadOnlyList<Position> DiscoveredWalls => discoveredWalls;
@@ -59,7 +59,7 @@ namespace Labb02_Dungeon_crawler
             }
         }
 
-        public LevelElement GetElementAt(int x, int y)
+        public LevelElement? GetElementAt(int x, int y)
         {
             foreach (var e in Elements)
             {
@@ -71,7 +71,7 @@ namespace Labb02_Dungeon_crawler
 
         public bool CanMoveTo(int x, int y, LevelElement mover)
         {
-            LevelElement obstacle = GetElementAt(x, y);
+            LevelElement? obstacle = GetElementAt(x, y);
 
             if (obstacle is Wall) return false;
 

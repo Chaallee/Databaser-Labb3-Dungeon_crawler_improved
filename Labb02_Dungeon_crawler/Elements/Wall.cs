@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Labb02_Dungeon_crawler.Elements
+namespace Dungeon_crawler_improved.Elements
 {
     public class Wall : LevelElement
     {

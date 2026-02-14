@@ -1,6 +1,6 @@
-﻿using Labb02_Dungeon_crawler.Elements;
+﻿using Dungeon_crawler_improved.Elements;
 
-namespace Labb02_Dungeon_crawler.GameState
+namespace Dungeon_crawler_improved.GameState
 {
     public static class GameStatePersistence
     {

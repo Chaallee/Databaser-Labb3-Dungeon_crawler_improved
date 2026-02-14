@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Labb02_Dungeon_crawler
+namespace Dungeon_crawler_improved
 {
     public struct Position
     {

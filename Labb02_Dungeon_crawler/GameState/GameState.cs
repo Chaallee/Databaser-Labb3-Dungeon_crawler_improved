@@ -2,17 +2,17 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace Labb02_Dungeon_crawler.GameState
+namespace Dungeon_crawler_improved.GameState
 {
     public class GameState
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
-        public PlayerState Player { get; set; }
-        public List<EnemyState> Enemies { get; set; }
-        public List<WallState> DiscoveredWalls { get; set; }
+        public required PlayerState Player { get; set; }
+        public required List<EnemyState> Enemies { get; set; }
+        public required List<WallState> DiscoveredWalls { get; set; }
         public int TurnCounter { get; set; }
     }
 }

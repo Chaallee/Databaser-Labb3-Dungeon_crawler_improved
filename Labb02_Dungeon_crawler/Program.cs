@@ -1,6 +1,6 @@
-﻿using Labb02_Dungeon_crawler;
-using Labb02_Dungeon_crawler.Database;
-using Labb02_Dungeon_crawler.GameState;
+﻿using Dungeon_crawler_improved;
+using Dungeon_crawler_improved.Database;
+using Dungeon_crawler_improved.GameState;
 using MongoDB.Driver;
 using System;
 using System.Linq;
@@ -61,7 +61,7 @@ public class Program
 
         Console.Write("Enter your name: ");
         Console.CursorVisible = true;
-        string playerName = Console.ReadLine();
+        string? playerName = Console.ReadLine();
 
         var classes = context.PlayerClasses.Find(_ => true).ToList();
         Console.WriteLine("\nChoose your class:");
@@ -83,11 +83,11 @@ public class Program
 
         Console.Write("\nSelect class by pressing one of the following keys: ");
         Console.CursorVisible = true;
-        string classInput = Console.ReadLine();
+        string? classInput = Console.ReadLine();
         Console.CursorVisible = false;
 
         int classIndex = 0;
-        if (int.TryParse(classInput, out int parsedIndex))
+        if (!string.IsNullOrWhiteSpace(classInput) && int.TryParse(classInput, out int parsedIndex))
         {
             classIndex = Math.Max(0, Math.Min(parsedIndex - 1, classes.Count - 1));
         }
@@ -105,13 +105,13 @@ public class Program
         var level = new LevelData();
         level.Load("Levels/Level1.txt");
         var player = level.Player;
-        player.Name = playerName;
+        player.Name = playerName ?? "Unknown";
         player.ClassName = className;
 
         Console.Clear();
         Console.Write("Welcome, ");
         Console.ForegroundColor = selectedClassColor;
-        Console.Write(playerName);
+        Console.Write(player.Name);
         Console.Write(" the ");
         Console.Write(className);
         Console.ResetColor();
@@ -136,6 +136,14 @@ public class Program
         }
 
         var state = repository.Load();
+        if (state == null)
+        {
+            Console.WriteLine("\nFailed to load saved game!");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey(true);
+            return;
+        }
+
         var level = GameStatePersistence.Load(state);
         var player = level.Player;
 

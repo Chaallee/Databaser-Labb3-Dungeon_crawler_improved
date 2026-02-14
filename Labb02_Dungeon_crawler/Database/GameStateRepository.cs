@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Labb02_Dungeon_crawler.Database
+namespace Dungeon_crawler_improved.Database
 {
     public class GameStateRepository
     {
@@ -17,7 +17,7 @@ namespace Labb02_Dungeon_crawler.Database
             collection.InsertOne(state);
         }
 
-        public GameState.GameState Load()
+        public GameState.GameState? Load()
         {
             return collection.Find(_ => true).FirstOrDefault();
         }

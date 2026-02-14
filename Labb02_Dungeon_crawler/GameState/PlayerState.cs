@@ -1,9 +1,9 @@
-﻿namespace Labb02_Dungeon_crawler.GameState
+﻿namespace Dungeon_crawler_improved.GameState
 {
     public class PlayerState
     {
-        public string Name { get; set; }
-        public string ClassName { get; set; }
+        public required string Name { get; set; }
+        public required string ClassName { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int Health { get; set; }

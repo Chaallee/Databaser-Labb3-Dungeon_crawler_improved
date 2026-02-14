@@ -1,10 +1,10 @@
-﻿using Labb02_Dungeon_crawler.Elements;
-using Labb02_Dungeon_crawler.Database;
-using Labb02_Dungeon_crawler.GameState;
+﻿using Dungeon_crawler_improved.Elements;
+using Dungeon_crawler_improved.Database;
+using Dungeon_crawler_improved.GameState;
 using System;
 using System.Threading;
 
-namespace Labb02_Dungeon_crawler
+namespace Dungeon_crawler_improved
 {
     public class GameLoop
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Labb02_Dungeon_crawler.Elements
+namespace Dungeon_crawler_improved.Elements
 {
     public abstract class Enemy : LevelElement
     {
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
         public int Health { get; protected set; }
-        public Dice AttackDice { get; protected set; }
-        public Dice DefenceDice { get; protected set; }
+        public Dice AttackDice { get; protected set; } = null!;
+        public Dice DefenceDice { get; protected set; } = null!;
 
         protected Enemy(int x, int y, ConsoleColor color, char symbol, string name, int health, Dice attackDice, Dice defenceDice)
             : base(x, y, color, symbol)

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labb02_Dungeon_crawler.GameState
+namespace Dungeon_crawler_improved.GameState
 {
     public class EnemyState
     {
-        public string EnemyType { get; set; } 
+        public string EnemyType { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }

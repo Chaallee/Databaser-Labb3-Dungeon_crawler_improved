@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Labb02_Dungeon_crawler.Database
+namespace Dungeon_crawler_improved.Database
 {
     public static class DatabaseSeeder
     {
