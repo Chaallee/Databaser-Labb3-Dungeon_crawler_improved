@@ -22,6 +22,17 @@ public class Program
         ShowMainMenu(context, repository);
     }
 
+    static ConsoleColor GetClassColor(string className)
+    {
+        return className switch
+        {
+            "Warrior" => ConsoleColor.Red,
+            "Wizard" => ConsoleColor.Blue,
+            "Rogue" => ConsoleColor.Green,
+            _ => ConsoleColor.White
+        };
+    }
+
     static void ShowMainMenu(MongoContext context, GameStateRepository repository)
     {
         while (true)
@@ -62,45 +73,35 @@ public class Program
         Console.Write("Enter your name: ");
         Console.CursorVisible = true;
         string? playerName = Console.ReadLine();
+        Console.CursorVisible = false;
 
         var classes = context.PlayerClasses.Find(_ => true).ToList();
         Console.WriteLine("\nChoose your class:");
 
         for (int i = 0; i < classes.Count; i++)
         {
-            ConsoleColor classColor = classes[i].Name switch
-            {
-                "Warrior" => ConsoleColor.Red,
-                "Wizard" => ConsoleColor.Blue,
-                "Rogue" => ConsoleColor.Green,
-                _ => ConsoleColor.White
-            };
-
-            Console.ForegroundColor = classColor;
+            Console.ForegroundColor = GetClassColor(classes[i].Name);
             Console.WriteLine($"{i + 1}. {classes[i].Name}");
             Console.ResetColor();
         }
 
-        Console.Write("\nSelect class by pressing one of the following keys: ");
-        Console.CursorVisible = true;
-        string? classInput = Console.ReadLine();
-        Console.CursorVisible = false;
+        Console.Write("\nSelect class (1-3): ");
 
-        int classIndex = 0;
-        if (!string.IsNullOrWhiteSpace(classInput) && int.TryParse(classInput, out int parsedIndex))
+        int classIndex = -1;
+        while (classIndex == -1)
         {
-            classIndex = Math.Max(0, Math.Min(parsedIndex - 1, classes.Count - 1));
+            var classKey = Console.ReadKey(true);
+            classIndex = classKey.KeyChar switch
+            {
+                '1' => 0,
+                '2' => 1,
+                '3' => 2,
+                _ => -1
+            };
         }
+        Console.WriteLine();
 
         string className = classes[classIndex].Name;
-
-        ConsoleColor selectedClassColor = className switch
-        {
-            "Warrior" => ConsoleColor.Red,
-            "Wizard" => ConsoleColor.Blue,
-            "Rogue" => ConsoleColor.Green,
-            _ => ConsoleColor.White
-        };
 
         var level = new LevelData();
         level.Load("Levels/Level1.txt");
@@ -110,14 +111,14 @@ public class Program
 
         Console.Clear();
         Console.Write("Welcome, ");
-        Console.ForegroundColor = selectedClassColor;
+        Console.ForegroundColor = GetClassColor(className);
         Console.Write(player.Name);
         Console.Write(" the ");
         Console.Write(className);
         Console.ResetColor();
         Console.WriteLine("!");
 
-        Console.WriteLine("\nControls: WASD or Arrow Keys to move, ESC to save and exit");
+        Console.WriteLine("\nControls: WASD or Arrow Keys to move, Spacebar to stand still, ESC to save and exit");
         Console.WriteLine("\nPress any key to start...");
         Console.ReadKey(true);
 
@@ -148,7 +149,14 @@ public class Program
         var player = level.Player;
 
         Console.Clear();
-        Console.WriteLine($"Welcome back, {player.Name} the {player.ClassName}!");
+        Console.Write("Welcome back, ");
+        Console.ForegroundColor = GetClassColor(player.ClassName);
+        Console.Write(player.Name);
+        Console.Write(" the ");
+        Console.Write(player.ClassName);
+        Console.ResetColor();
+        Console.WriteLine("!");
+
         Console.WriteLine($"Turn: {level.TurnCounter}, Health: {player.Health}");
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey(true);
